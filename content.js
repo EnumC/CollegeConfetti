@@ -5,7 +5,11 @@
 // Also welcome to the source code :)
 // MIT license applies
 
-let newCanvas = $('body').prepend('<canvas id="canvas" style="display: block; position: relative;z-index: 1; pointer-events: none;"></canvas>');
+// let newCanvas = $('body').prepend('<canvas id="canvas" style="display: block; position: relative;z-index: 1; pointer-events: none;"></canvas>');
+let newCanvas = $('body').prepend('<canvas id="canvas" style="display: block; position: absolute; top:0; left:0; z-index: 100; pointer-events: none; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; filter: alpha(opacity=50); -moz-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5;"></canvas>');
+
+let heightMultiplier = 1; // This sets how high you want the confetti to be. 1 is full page, 0.5 is half page. 
+
 console.log("new canvas: ", newCanvas);
 $('#canvas').attr('height', '0');
 function rootDomain(url) {
@@ -80,7 +84,7 @@ function startTheConfetti() {
             ctx.fillStyle = "#003300";
             ctx.font = '20px san-serif';
 
-            var textString = "CONGRATS! YOU GOT IN TO " + collegename.toUpperCase() + "! Scroll down for your letter. - Eric1084",
+            var textString = "CONGRATS! YOU GOT IN TO " + collegename.toUpperCase() + "! Scroll down for your letter.",
                 textWidth = ctx.measureText(textString).width;
 
 
@@ -98,7 +102,7 @@ function startTheConfetti() {
             W = window.innerWidth;
             H = window.innerHeight;
             canvas.width = W;
-            canvas.height = H / 2;
+            canvas.height = H * heightMultiplier;
         });
 
     });
@@ -114,7 +118,7 @@ function startTheConfetti() {
         W = window.innerWidth;
         H = window.innerHeight;
         canvas.width = W;
-        canvas.height = H / 2;
+        canvas.height = H * heightMultiplier;
     }
 
     function InitializeConfetti() {
@@ -206,7 +210,7 @@ function startTheConfetti() {
         W = window.innerWidth;
         H = window.innerHeight;
         canvas.width = W;
-        canvas.height = H / 2;
+        canvas.height = H * heightMultiplier;
         (function animloop() {
             if (animationComplete) return null;
             animationHandler = requestAnimFrame(animloop);
