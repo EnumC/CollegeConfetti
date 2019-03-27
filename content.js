@@ -5,8 +5,9 @@
 // Also welcome to the source code :)
 // MIT license applies
 
-$('body').prepend('<canvas id="canvas" style="display: block; position: relative;z-index: 1; pointer-events: none;"></canvas>');
-
+let newCanvas = $('body').prepend('<canvas id="canvas" style="display: block; position: relative;z-index: 1; pointer-events: none;"></canvas>');
+console.log("new canvas: ", newCanvas);
+$('#canvas').attr('height', '0');
 function rootDomain(url) {
     var rightPeriodIndex;
     for (var i = url.length - 1; i >= 0; i--) {
@@ -14,7 +15,7 @@ function rootDomain(url) {
             //console.log("rightPeriodIndex", i);
             rightPeriodIndex = i;
             var noExtension = url.substr(0, i);
-            console.log("this is noExtension", noExtension);
+            console.log("this is noExtension var: ", noExtension);
             break;
         }
     }
@@ -252,7 +253,11 @@ function startTheConfetti() {
     })();
 };
 
-
+function acceptRoutine() {
+    startTheConfetti();
+    // $(".confetti-canvas").appendTo('head');
+    accepted = true;
+}
 
 console.log("checking for accep");
 
@@ -272,27 +277,27 @@ function checkAccept() {
         if ($("*:contains('Congratulation')").length > 0) {
             // $("body").wrap( "<canvas id='congrats'></canvas>" );
             console.log('default accept detected: Woot woot!');
-            startTheConfetti();
-            $(".confetti-canvas").appendTo('head');
-            accepted = true;
+            acceptRoutine();
         }
         // console.log($('iframe')[0]);
-        if($('iframe')[0] != null) {
-
-        
-            if (
-                (
-                    ($('iframe')[0].contentWindow.document.documentElement.textContent || $('iframe')[0].contentWindow.document.documentElement.innerText).indexOf('Congratulation') > -1)
-            ) {
-                console.log('iframe accept detected: Woot woot!');
-                startTheConfetti();
-                $(".confetti-canvas").appendTo('head');
-                accepted = true;
+        try {
+            if ($('iframe')[0] != null) {
+                if (
+                    (
+                        ($('iframe')[0].contentWindow.document.documentElement.textContent || $('iframe')[0].contentWindow.document.documentElement.innerText).indexOf('Congratulation') > -1)
+                ) {
+                    console.log('iframe accept detected: Woot woot!');
+                    acceptRoutine();
+                }
+            }
+            else {
+                console.log('iframe does not exist');
             }
         }
-        else {
-            console.log('iframe does not exist');
+        catch {
+            console.warn("iframe policy blocked access to contentWindow unfortunately, so detection might not be as through.");
         }
+        
 
         setTimeout('checkAccept()', 1000);
     }
