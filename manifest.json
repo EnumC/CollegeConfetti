@@ -1,7 +1,7 @@
 {
   "name": "CollegeConfetti",
   "description": "Admission Letter Stress Be Gone!",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icons": {
     "128": "128.png",
     "48": "48.png"
@@ -16,6 +16,13 @@
   "permissions": [
     "http://*.edu/*",
     "https://*.edu/*"
+  ],
+  "web_accessible_resources": [
+    "music/soundtrack1.mp3",
+    "music/soundtrack2.mp3",
+    "music/soundtrack3.mp3",
+    "music/soundtrack4.mp3",
+    "music/soundtrack5.mp3"
   ],
   "author": "Eric Qian",
   "homepage_url": "https://bananiumlabs.com",

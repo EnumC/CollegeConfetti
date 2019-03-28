@@ -263,6 +263,12 @@ function acceptRoutine() {
     accepted = true;
 }
 
+function startMusic() {
+    
+    var congratsAudio = new Audio(chrome.runtime.getURL("soundtrack1.mp3"));
+    congratsAudio.play();
+
+}
 console.log("checking for accep");
 
 let accepted = false;
@@ -298,12 +304,12 @@ function checkAccept() {
                 console.log('iframe does not exist');
             }
         }
-        catch {
-            console.warn("iframe policy blocked access to contentWindow unfortunately, so detection might not be as through.");
+        catch (err) {
+            console.warn("iframe policy blocked access to contentWindow unfortunately, so detection might not be as through: ", err);
         }
         
 
-        setTimeout('checkAccept()', 1000);
+        setTimeout(checkAccept, 1000);
     }
         
 }
